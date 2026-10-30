@@ -6,7 +6,7 @@
 
 const CONFIG = {
   // Endereço da automação de envio (ex.: https://formspree.io/f/SEU_CODIGO). Vazio = automação desligada.
-  automacaoEndpoint: "",
+  automacaoEndpoint: "https://formspree.io/f/xgaallgb",
   // PIN do painel administrativo (acesso: adicionar #admin no endereço do site). Não é segurança real.
   pinAdmin: "admin2026",
   chaveStorage: "portfolio_mensagens"
