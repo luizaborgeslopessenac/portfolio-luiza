@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-bs-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Luiza Borges Lopes – Portfólio</title>
+  <meta name="description" content="Portfólio de Luiza Borges Lopes, estudante de Tecnologia da Informação.">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+<nav class="navbar navbar-expand-md sticky-top" id="topo">
+  <div class="container">
+    <a class="navbar-brand" href="#inicio"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>Luiza Borges Lopes</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu" aria-controls="menu" aria-expanded="false" aria-label="Abrir menu"><span class="navbar-toggler-icon"></span></button>
+    <div class="collapse navbar-collapse" id="menu">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="#inicio">Início</a></li>
+        <li class="nav-item"><a class="nav-link" href="#sobre">Sobre mim</a></li>
+        <li class="nav-item"><a class="nav-link" href="#areas">Áreas do conhecimento</a></li>
+        <li class="nav-item"><a class="nav-link" href="#tendencias">Tendências tecnológicas</a></li>
+        <li class="nav-item"><a class="nav-link" href="#projetos">Projetos</a></li>
+        <li class="nav-item"><a class="nav-link" href="#contato">Contato</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<main id="site">
+  <section id="inicio" class="hero">
+    <div class="container">
+      <div class="row align-items-center g-4">
+        <div class="col-md-7 order-2 order-md-1">
+          <h1>Luiza Borges Lopes</h1>
+          <p class="lead-role">Estudante de Tecnologia da Informação · Desenvolvedora Web em formação</p>
+          <p>Olá! Seja bem-vindo(a) ao meu portfólio. Tenho interesse em programação, desenvolvimento web e inovação tecnológica.</p>
+          <p>Este portfólio foi desenvolvido como parte da minha jornada acadêmica, para apresentar meus conhecimentos, projetos e aprendizados na área de TI.</p>
+          <p class="lema">Tecnologia, criatividade e aprendizado contínuo: construindo meu futuro na TI.</p>
+          <div class="d-flex flex-wrap gap-2 mt-4">
+            <a href="#projetos" class="btn btn-ink">Ver projetos</a>
+            <a href="#contato" class="btn btn-outline-ink">Enviar mensagem</a>
+          </div>
+        </div>
+        <div class="col-8 col-md-5 order-1 order-md-2 mx-auto">
+          <div class="foto-wrap"><span class="lua-grande" aria-hidden="true"></span><div class="foto-arco"><img src="assets/foto-luiza.jpg" alt="Retrato de Luiza Borges Lopes" width="360" height="480"></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="fases" aria-hidden="true">🌑 🌒 🌓 🌔 🌕</div>
+
+  <section id="sobre" class="bloco bloco-branco">
+    <div class="container">
+      <h2>Sobre mim</h2>
+      <div class="row g-4">
+        <div class="col-lg-6">
+          <h3>Perfil profissional</h3>
+          <p>Sou estudante de Tecnologia da Informação e estou desenvolvendo meus conhecimentos em programação, criação de interfaces e resolução de problemas por meio da tecnologia.</p>
+          <p>Tenho interesse em compreender como os sistemas são construídos, como a lógica de programação transforma ideias em soluções e como o desenvolvimento web pode criar experiências digitais funcionais e acessíveis.</p>
+          <p>Durante minha formação, busco transformar os conteúdos estudados em aplicações práticas: desenvolvo projetos para experimentar, identificar erros, testar soluções e acompanhar minha evolução técnica. Meu objetivo é aprofundar meus conhecimentos em desenvolvimento de software e construir uma trajetória profissional na área de TI.</p>
+          <h3 class="mt-4">Habilidades comportamentais</h3>
+          <ul class="chips" id="soft-skills"></ul>
+        </div>
+        <div class="col-lg-6">
+          <h3>Habilidades técnicas</h3>
+          <div class="table-responsive">
+            <table class="table align-middle tabela-skills">
+              <thead><tr><th>Tecnologia</th><th>O que eu faço com ela</th></tr></thead>
+              <tbody id="hard-skills"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="areas" class="bloco">
+    <div class="container">
+      <h2>Áreas do conhecimento</h2>
+      <p class="intro">Como as disciplinas do Ensino Médio contribuíram para a minha lógica de programação.</p>
+      <div class="row g-4" id="areas-grid"></div>
+    </div>
+  </section>
+
+  <section id="tendencias" class="bloco bloco-branco">
+    <div class="container">
+      <h2>Tendências tecnológicas</h2>
+      <p class="intro">Resumos técnicos sobre quatro temas que estão moldando o futuro da tecnologia.</p>
+      <div class="row g-4">
+        <div class="col-md-4 col-lg-3"><div class="nav flex-md-column nav-pills gap-2" id="trend-tabs" role="tablist"></div></div>
+        <div class="col-md-8 col-lg-9"><div class="tab-content trend-painel" id="trend-panes"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projetos" class="bloco">
+    <div class="container">
+      <h2>Galeria de projetos</h2>
+      <p class="intro">Projetos de TI desenvolvidos durante a formação: cada um foi uma chance de aplicar conhecimentos e testar soluções.</p>
+      <div id="projetos-lista" class="d-grid gap-5"></div>
+    </div>
+  </section>
+
+  <section id="contato" class="bloco bloco-branco">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <h2>Entre em contato</h2>
+          <p class="intro">Gostou dos meus projetos ou quer conversar sobre tecnologia e desenvolvimento web? Use o formulário para enviar uma mensagem.</p>
+          <form id="form-contato" novalidate>
+            <div class="row g-3">
+              <div class="col-md-6"><label class="form-label" for="c-nome">Nome</label><input class="form-control" id="c-nome" name="nome" required maxlength="80"><div class="invalid-feedback">Informe seu nome.</div></div>
+              <div class="col-md-6"><label class="form-label" for="c-email">E-mail</label><input class="form-control" id="c-email" name="email" type="email" required maxlength="120"><div class="invalid-feedback">Informe um e-mail válido.</div></div>
+              <div class="col-12"><label class="form-label" for="c-assunto">Assunto</label><input class="form-control" id="c-assunto" name="assunto" required maxlength="100"><div class="invalid-feedback">Informe o assunto.</div></div>
+              <div class="col-12"><label class="form-label" for="c-msg">Mensagem</label><textarea class="form-control" id="c-msg" name="mensagem" rows="5" required maxlength="1000"></textarea><div class="invalid-feedback">Escreva sua mensagem.</div></div>
+              <div class="col-12"><button class="btn btn-ink" type="submit" id="btn-enviar">Enviar mensagem</button></div>
+            </div>
+          </form>
+          <div id="retorno" class="mt-3" role="status" aria-live="polite"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="rodape">
+  <div class="container d-flex flex-wrap justify-content-between gap-2">
+    <span>🌙 © 2026 Luiza Borges Lopes</span>
+    <span>Feito do zero com HTML5, CSS3, JavaScript e Bootstrap</span>
+  </div>
+</footer>
+
+<!-- Painel administrativo oculto: abra com #admin no endereço -->
+<section id="admin-area" class="d-none">
+  <div class="container py-4">
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
+      <h2 class="m-0">Painel administrativo</h2>
+      <a href="#inicio" class="btn btn-outline-ink btn-sm" id="admin-sair">Sair e voltar ao site</a>
+    </div>
+    <div id="admin-login" class="d-none card card-body col-md-6">
+      <label class="form-label" for="pin">PIN de acesso</label>
+      <div class="input-group"><input type="password" class="form-control" id="pin" autocomplete="off"><button class="btn btn-ink" id="pin-ok" type="button">Entrar</button></div>
+      <div class="text-danger small mt-2" id="pin-erro"></div>
+    </div>
+    <div id="admin-painel" class="d-none">
+      <div class="d-flex flex-wrap gap-2 mb-3">
+        <input type="search" class="form-control w-auto flex-grow-1" id="busca" placeholder="Buscar por nome, e-mail ou assunto" aria-label="Buscar mensagens">
+        <button class="btn btn-ink" id="btn-nova" type="button">Nova mensagem</button>
+        <button class="btn btn-outline-ink" id="btn-reset" type="button">Restaurar 20 registros de teste</button>
+      </div>
+      <p class="small text-muted" id="contagem"></p>
+      <div class="table-responsive">
+        <table class="table table-hover align-middle tabela-admin">
+          <thead><tr><th>Data</th><th>Nome</th><th>E-mail</th><th>Assunto</th><th>Mensagem</th><th>Envio</th><th class="text-end">Ações</th></tr></thead>
+          <tbody id="admin-linhas"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="modal fade" id="modal-msg" tabindex="-1" aria-labelledby="modal-titulo" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable"><div class="modal-content">
+    <form id="form-admin" novalidate>
+      <div class="modal-header"><h5 class="modal-title" id="modal-titulo">Mensagem</h5><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button></div>
+      <div class="modal-body">
+        <input type="hidden" id="a-id">
+        <div class="mb-3"><label class="form-label" for="a-nome">Nome</label><input class="form-control" id="a-nome" required></div>
+        <div class="mb-3"><label class="form-label" for="a-email">E-mail</label><input class="form-control" id="a-email" type="email" required></div>
+        <div class="mb-3"><label class="form-label" for="a-assunto">Assunto</label><input class="form-control" id="a-assunto" required></div>
+        <div class="mb-3"><label class="form-label" for="a-msg">Mensagem</label><textarea class="form-control" id="a-msg" rows="4" required></textarea></div>
+        <div><label class="form-label" for="a-envio">Status do envio</label>
+          <select class="form-select" id="a-envio"><option value="enviado">Enviado</option><option value="falhou">Falhou</option><option value="pendente">Pendente</option><option value="nao_configurado">Automação não configurada</option></select></div>
+      </div>
+      <div class="modal-footer"><button type="button" class="btn btn-outline-ink" data-bs-dismiss="modal">Cancelar</button><button class="btn btn-ink" type="submit">Salvar</button></div>
+    </form>
+  </div></div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

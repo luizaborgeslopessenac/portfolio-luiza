@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Coletor de Estrelas</title>
+<style>
+:root{--bg:#eef1f6;--fg:#1d2433;--muted:#5b6578;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#141a26;--fg:#e8ecf4;--muted:#9aa5ba}}
+:root[data-theme="dark"]{--bg:#141a26;--fg:#e8ecf4;--muted:#9aa5ba}
+html,body{margin:0;background:var(--bg);color:var(--fg);font-family:"Trebuchet MS",Verdana,sans-serif}
+body{display:flex;flex-direction:column;align-items:center;padding:16px}
+h1{font-size:1.4rem;margin:0 0 4px}
+p{margin:0 0 12px;color:var(--muted);font-size:.95rem;text-align:center}
+canvas{max-width:100%;height:auto;border-radius:6px;border:3px solid #2b3550;background:#1b2238;touch-action:none}
+</style>
+</head>
+<body>
+<h1>Coletor de Estrelas</h1>
+<p>Setas ou WASD para mover. Colete 10 estrelas e desvie dos inimigos. R reinicia.</p>
+<canvas id="c" width="640" height="420"></canvas>
+<script>
+const cv=document.getElementById('c'),ctx=cv.getContext('2d');
+const W=640,H=420,META=10;
+// Variáveis do jogo
+let Pontos,Vidas,JogoAtivo,Invencivel,msg,jogador,estrelas,inimigos,tInv;
+const paredes=[{x:150,y:110,w:20,h:140},{x:330,y:200,w:160,h:20},{x:470,y:60,w:20,h:110}];
+const teclas={};
+function colide(a,b){return a.x<b.x+b.w&&a.x+a.w>b.x&&a.y<b.y+b.h&&a.y+a.h>b.y}
+function livre(o){return !paredes.some(p=>colide(o,p))}
+function iniciar(){ // Ao iniciar o layout
+  Pontos=0;Vidas=3;JogoAtivo=true;Invencivel=false;tInv=0;msg='';
+  jogador={x:30,y:30,w:26,h:26,v:3.2};
+  estrelas=[];
+  while(estrelas.length<12){
+    const e={x:20+Math.random()*(W-50),y:20+Math.random()*(H-50),w:18,h:18};
+    if(livre(e)&&Math.hypot(e.x-30,e.y-30)>80)estrelas.push(e);
+  }
+  inimigos=[{x:250,y:300,w:28,h:28,dx:2.2,dy:1.6},{x:540,y:300,w:28,h:28,dx:-1.8,dy:2.2},{x:300,y:60,w:28,h:28,dx:2,dy:-1.4}];
+}
+function mover(o,dx,dy){
+  o.x+=dx;if(!livre(o)||o.x<0||o.x+o.w>W)o.x-=dx;
+  o.y+=dy;if(!livre(o)||o.y<0||o.y+o.h>H)o.y-=dy;
+}
+function atualizar(){
+  if(!JogoAtivo)return;
+  let dx=0,dy=0;
+  if(teclas.ArrowLeft||teclas.a)dx-=1;if(teclas.ArrowRight||teclas.d)dx+=1;
+  if(teclas.ArrowUp||teclas.w)dy-=1;if(teclas.ArrowDown||teclas.s)dy+=1;
+  if(dx&&dy){dx*=.707;dy*=.707}
+  mover(jogador,dx*jogador.v,dy*jogador.v);
+  inimigos.forEach(i=>{ // inimigo quica nas paredes (Bounce off solids)
+    i.x+=i.dx;if(!livre(i)||i.x<0||i.x+i.w>W){i.x-=i.dx;i.dx*=-1}
+    i.y+=i.dy;if(!livre(i)||i.y<0||i.y+i.h>H){i.y-=i.dy;i.dy*=-1}
+  });
+  // Jogador colide com Estrela: destrói e soma ponto
+  estrelas=estrelas.filter(e=>{if(colide(jogador,e)){Pontos++;return false}return true});
+  // Jogador colide com Inimigo: perde 1 vida (com invencibilidade)
+  if(!Invencivel&&inimigos.some(i=>colide(jogador,i))){
+    Vidas--;Invencivel=true;tInv=90;jogador.x=30;jogador.y=30;
+  }
+  if(Invencivel&&--tInv<=0)Invencivel=false;
+  if(Pontos>=META){msg='VITÓRIA!';JogoAtivo=false}
+  else if(Vidas<=0){msg='DERROTA!';JogoAtivo=false}
+}
+function desenhar(){
+  ctx.fillStyle='#1b2238';ctx.fillRect(0,0,W,H);
+  ctx.fillStyle='#5a6a96';paredes.forEach(p=>ctx.fillRect(p.x,p.y,p.w,p.h));
+  ctx.fillStyle='#ffd23f';
+  estrelas.forEach(e=>{ctx.beginPath();for(let k=0;k<10;k++){const r=k%2?4:10,a=-Math.PI/2+k*Math.PI/5;ctx.lineTo(e.x+9+r*Math.cos(a),e.y+9+r*Math.sin(a))}ctx.closePath();ctx.fill()});
+  ctx.fillStyle='#e8505b';inimigos.forEach(i=>{ctx.fillRect(i.x,i.y,i.w,i.h);ctx.fillStyle='#fff';ctx.fillRect(i.x+6,i.y+8,5,5);ctx.fillRect(i.x+17,i.y+8,5,5);ctx.fillStyle='#e8505b'});
+  if(!Invencivel||Math.floor(tInv/6)%2===0){ctx.fillStyle='#3fd0c9';ctx.fillRect(jogador.x,jogador.y,jogador.w,jogador.h);ctx.fillStyle='#1b2238';ctx.fillRect(jogador.x+5,jogador.y+7,5,5);ctx.fillRect(jogador.x+16,jogador.y+7,5,5)}
+  ctx.fillStyle='#fff';ctx.font='bold 18px Trebuchet MS, sans-serif';ctx.textAlign='left';
+  ctx.fillText('Pontos: '+Pontos+' / '+META,12,H-10);
+  ctx.textAlign='right';ctx.fillText('Vidas: '+Vidas,W-12,H-10);
+  if(msg){
+    ctx.fillStyle='rgba(10,14,26,.78)';ctx.fillRect(0,0,W,H);
+    ctx.textAlign='center';ctx.fillStyle=msg==='VITÓRIA!'?'#ffd23f':'#e8505b';
+    ctx.font='bold 54px Trebuchet MS, sans-serif';ctx.fillText(msg,W/2,H/2);
+    ctx.fillStyle='#fff';ctx.font='20px Trebuchet MS, sans-serif';ctx.fillText('Aperte R para jogar de novo',W/2,H/2+40);
+  }
+}
+addEventListener('keydown',e=>{
+  const k=e.key.length===1?e.key.toLowerCase():e.key;teclas[k]=true;
+  if(k==='r')iniciar();
+  if(k.startsWith('Arrow'))e.preventDefault();
+});
+addEventListener('keyup',e=>{teclas[e.key.length===1?e.key.toLowerCase():e.key]=false});
+function loop(){atualizar();desenhar();requestAnimationFrame(loop)}
+iniciar();loop();
+</script>
+</body>
+</html>
