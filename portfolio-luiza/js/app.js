@@ -36,8 +36,12 @@
 
   /* ---------- Armazenamento (LocalStorage + JSON) ---------- */
   const KEY = CONFIG.chaveStorage;
-  const carregar = () => { try { const l = JSON.parse(localStorage.getItem(KEY)); return Array.isArray(l) ? l : []; } catch (e) { return []; } };
-  const salvar = l => localStorage.setItem(KEY, JSON.stringify(l));
+  let mem = null; // reserva em memória caso o navegador bloqueie o LocalStorage
+  const carregar = () => { try { const l = JSON.parse(localStorage.getItem(KEY)); return Array.isArray(l) ? l : []; } catch (e) { return mem || []; } };
+  const salvar = l => { mem = l; try { localStorage.setItem(KEY, JSON.stringify(l)); } catch (e) { /* bloqueado */ } };
+  const sessao = { get: () => { try { return sessionStorage.getItem('admin_ok'); } catch (e) { return mem && mem.__ok ? '1' : null; } },
+    set: () => { try { sessao.set(); } catch (e) { window.__adm = true; } },
+    del: () => { try { sessao.del(); } catch (e) { window.__adm = false; } } };
   const novoId = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
 
   function gerarTestes() {
@@ -95,7 +99,7 @@
     [site, rodape, topo].forEach(e => e.classList.toggle('d-none', emAdmin));
     admin.classList.toggle('d-none', !emAdmin);
     if (!emAdmin) return;
-    const logado = sessionStorage.getItem('admin_ok') === '1';
+    const logado = (sessao.get() === '1' || window.__adm === true);
     $('#admin-login').classList.toggle('d-none', logado);
     $('#admin-painel').classList.toggle('d-none', !logado);
     if (logado) listar();
@@ -103,11 +107,11 @@
   window.addEventListener('hashchange', rotear);
 
   $('#pin-ok').addEventListener('click', () => {
-    if ($('#pin').value === CONFIG.pinAdmin) { sessionStorage.setItem('admin_ok', '1'); $('#pin').value = ''; $('#pin-erro').textContent = ''; rotear(); }
+    if ($('#pin').value === CONFIG.pinAdmin) { sessao.set(); $('#pin').value = ''; $('#pin-erro').textContent = ''; rotear(); }
     else $('#pin-erro').textContent = 'PIN incorreto.';
   });
   $('#pin').addEventListener('keydown', e => { if (e.key === 'Enter') $('#pin-ok').click(); });
-  $('#admin-sair').addEventListener('click', () => sessionStorage.removeItem('admin_ok'));
+  $('#admin-sair').addEventListener('click', () => sessao.del());
 
   function listar() {
     const q = $('#busca').value.trim().toLowerCase();

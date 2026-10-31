@@ -93,10 +93,11 @@ FIM`,
     repo: null },
   { titulo: "Contrato digital – Tio Rodrigo e Tia Dani",
     objetivo: "Substituir o contrato em papel do transporte escolar por um contrato digital, assinado pelo computador ou pelo celular.",
-    descricao: "A família preenche os dados do responsável e da criança e assina na tela. Ao enviar, o contrato vai automaticamente para uma planilha do Google e já preenche também a aba de controle de pagamentos. As imagens ao lado mostram a estrutura das planilhas (sem dados reais).",
+    descricao: "A família preenche os dados do responsável e da criança e assina na tela. Ao enviar, o contrato vai automaticamente para uma planilha do Google e já preenche também a aba de controle de pagamentos. As imagens mostram o formulário do contrato e a estrutura das planilhas (sem dados reais).",
     tecnologias: ["Google Apps Script", "Planilhas Google"],
     aprendizado: "Automatizar um processo real: do formulário assinado até o controle de pagamentos.",
     imagens: [
+      { src: "assets/contrato-formulario.png", alt: "Formulário do contrato digital: leitura do contrato, dados do responsável e da criança, contatos de emergência, mensalidade, documentos e assinatura" },
       { src: "assets/contrato-cadastros.png", alt: "Planilha de cadastros com data do envio, responsável, CPF, e-mail, endereço e dados da criança" },
       { src: "assets/contrato-pagamentos.png", alt: "Planilha de controle de pagamentos com mensalidade, vencimento e meses de 2027" }
     ],

@@ -30,7 +30,7 @@ Mobile First com grid, navbar, tabelas e utilitários do Bootstrap, mais Flexbox
 Como configurar:
 1. Criar conta em formspree.io e um formulário com o e-mail que vai receber as notificações.
 2. Copiar o endereço `https://formspree.io/f/XXXXXXXX`.
-3. Colar em `js/data.js`, em `CONFIG.automacaoEndpoint`.
+3. Colar em `js/data.js`, em `CONFIG.automacaoEndpoint` (já configurado neste projeto).
 
 Enquanto o endereço estiver vazio, o site avisa que a automação não está configurada.
 
